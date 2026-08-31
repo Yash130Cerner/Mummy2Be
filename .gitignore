@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+next-env.d.ts
+
+# environment - never commit secrets
+# .env.* catches every variant (.env.local, .env.production, .env.bak, ...)
+.env
+.env.*
+!.env.example
+
+# payload local media uploads (use Vercel Blob in production)
+/media
+
+# misc
+.DS_Store
+*.tsbuildinfo
+.vercel
+.pg-data

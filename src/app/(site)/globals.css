@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Mummy2Be design tokens - warm-luxury maternity boutique.
+   Photography is the hero; the UI recedes. One action colour (terracotta).
+   Gold, blush and mauve are decorative only - never buttons, never text.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  --color-ivory: #faf6ef;
+  --color-champagne: #f1e8da;
+  --color-taupe: #e3d8c8;
+  --color-cocoa: #37291f;
+  --color-cocoa-light: #6e5c4f;
+  --color-terracotta: #9e5340;
+  --color-terracotta-dark: #864233;
+  --color-gold: #bf9a54;
+  --color-sage: #7e8e6c;
+  --color-sage-text: #556049;
+  --color-avail-green: #5f8a5a;
+  --color-avail-amber: #b8863c;
+  --color-avail-grey: #8c837b;
+  --color-blush: #e7d2cc;
+  --color-mauve: #c6acb3;
+
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Soft, never sharp; never full-pill for buttons. */
+  --radius-soft-sm: 6px;
+  --radius-soft: 10px;
+  --radius-soft-lg: 16px;
+
+  /* Warm, low-elevation shadows only. */
+  --shadow-warm: 0 4px 16px rgba(55, 41, 31, 0.08);
+  --shadow-warm-lg: 0 10px 30px rgba(55, 41, 31, 0.12);
+
+  --container-page: 1200px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* Visible focus, always - never removed (WCAG AA). */
+  :focus-visible {
+    outline: 2px solid var(--color-cocoa);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-blush);
+    color: var(--color-cocoa);
+  }
+
+  /* Native date inputs pick up the body font. */
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+}
+
+@layer components {
+  /* Type scale (desktop / mobile) per the design system §3. */
+  .text-display {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .text-h2 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  .text-h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 500;
+  }
+  .text-h4 {
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    .text-display {
+      font-size: 52px;
+    }
+    .text-h2 {
+      font-size: 38px;
+    }
+    .text-h3 {
+      font-size: 28px;
+    }
+    .text-h4 {
+      font-size: 22px;
+    }
+  }
+
+  .text-body-lg {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  @media (min-width: 768px) {
+    .text-body-lg {
+      font-size: 18px;
+    }
+  }
+
+  .text-caption {
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* Pricing: Inter 600, tabular figures, always with the duration. */
+  .price {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-cocoa);
+  }
+
+  /* Page container: max 1200px, 24px side padding (16px on mobile). */
+  .container-page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 24px;
+    }
+  }
+
+  /* Thin gold flourish - decorative only. */
+  .gold-rule {
+    display: block;
+    width: 48px;
+    height: 2px;
+    background-color: var(--color-gold);
+    border-radius: 1px;
+  }
+
+  /* Long-form rich text (About story, Terms, blog articles). */
+  .prose-m2b {
+    max-width: 68ch;
+  }
+  .prose-m2b > * + * {
+    margin-top: 1em;
+  }
+  .prose-m2b h2 {
+    font-size: 26px;
+    margin-top: 1.8em;
+  }
+  .prose-m2b h3 {
+    font-size: 21px;
+    margin-top: 1.5em;
+  }
+  @media (min-width: 768px) {
+    .prose-m2b h2 {
+      font-size: 30px;
+    }
+    .prose-m2b h3 {
+      font-size: 24px;
+    }
+  }
+  .prose-m2b a {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-m2b a:hover {
+    color: var(--color-terracotta-dark);
+  }
+  .prose-m2b ul {
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+  .prose-m2b ol {
+    list-style: decimal;
+    padding-left: 1.4em;
+  }
+  .prose-m2b li + li {
+    margin-top: 0.4em;
+  }
+  .prose-m2b blockquote {
+    border-left: 3px solid var(--color-gold);
+    padding-left: 1em;
+    color: var(--color-cocoa-light);
+    font-style: italic;
+  }
+  .prose-m2b strong {
+    font-weight: 600;
+  }
+
+  /* Bottom-sheet / dialog primitives. */
+  dialog.sheet {
+    border: none;
+    padding: 0;
+    background: var(--color-ivory);
+    color: var(--color-cocoa);
+    max-height: 85dvh;
+  }
+  dialog.sheet::backdrop {
+    background: rgba(55, 41, 31, 0.4);
+  }
+  dialog.sheet[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile: slides up from the bottom. Desktop: centered card. */
+  .sheet-bottom {
+    margin: auto auto 0 auto;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+  }
+  @media (min-width: 640px) {
+    .sheet-bottom {
+      margin: auto;
+      max-width: 480px;
+      border-radius: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    dialog.sheet[open] {
+      animation: sheet-in 0.25s ease-out;
+    }
+    @keyframes sheet-in {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Hide scrollbars on swipeable rows while keeping them scrollable. */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

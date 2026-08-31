@@ -1,0 +1,40 @@
+{
+  "name": "mummy2be",
+  "version": "1.0.0",
+  "description": "Mummy2Be - premium maternity gown rental in Ontario, serving all of Canada. Contact-based reservations, no online payment.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap",
+    "seed": "payload run src/seed/index.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.37.0",
+    "@payloadcms/next": "^3.37.0",
+    "@payloadcms/richtext-lexical": "^3.37.0",
+    "@payloadcms/storage-vercel-blob": "^3.37.0",
+    "graphql": "^16.9.0",
+    "next": "~15.4.11",
+    "payload": "^3.37.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "resend": "^4.5.0",
+    "sharp": "^0.34.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.5",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.5",
+    "typescript": "^5.8.3"
+  }
+}
