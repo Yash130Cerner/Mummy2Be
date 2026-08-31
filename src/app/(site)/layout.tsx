@@ -7,7 +7,7 @@ import { FloatingContact } from '@/components/layout/FloatingContact'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { JsonLd } from '@/components/ui/JsonLd'
-import { SITE } from '@/lib/constants'
+import { IS_LIVE_DOMAIN, SITE } from '@/lib/constants'
 import { organizationSchema } from '@/lib/schema'
 
 import './globals.css'
@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     locale: 'en_CA',
     type: 'website',
   },
+  // Belt and braces with robots.ts: a crawler that ignores robots.txt, or one
+  // that finds a preview URL linked from elsewhere, still sees noindex. Clears
+  // itself once NEXT_PUBLIC_SERVER_URL is the real domain.
+  ...(IS_LIVE_DOMAIN ? {} : { robots: { index: false, follow: false } }),
 }
 
 export const viewport: Viewport = {

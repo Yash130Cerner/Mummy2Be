@@ -20,3 +20,6 @@ next-env.d.ts
 *.tsbuildinfo
 .vercel
 .pg-data
+
+# one-off media migration helper - kept locally, never committed
+/src/scripts/upload-media-to-blob.mjs

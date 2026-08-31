@@ -9,10 +9,30 @@
 export const SITE = {
   name: 'Mummy2Be',
   url: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  /**
+   * The one real public address. Anything that must not happen before launch
+   * - search indexing, AI crawling - is gated on SITE.url matching this, so
+   * going live is a single env var change plus a redeploy. Nothing here or in
+   * robots.ts needs editing again.
+   */
+  productionUrl: 'https://mummy2be.com',
   defaultTitle: 'Maternity Gown Rental in Ontario & Across Canada | Mummy2Be',
   defaultDescription:
     'Rent premium maternity gowns for your photoshoot, baby shower, and special moments. One size fits every bump, professionally cleaned, delivered across Canada. Reserve by message - same-day reply.',
 }
+
+// Tolerant on purpose: a stray trailing slash, different casing or a www.
+// prefix in NEXT_PUBLIC_SERVER_URL would otherwise leave the live site
+// silently noindexed, which is a failure nobody notices for weeks.
+const normalizeUrl = (url: string): string =>
+  url.trim().toLowerCase().replace(/\/+$/, '').replace('://www.', '://')
+
+/**
+ * True only when this build serves the real domain. False on localhost and on
+ * *.vercel.app, which keeps preview builds out of every index - so content is
+ * never attributed to a throwaway domain we later abandon.
+ */
+export const IS_LIVE_DOMAIN = normalizeUrl(SITE.url) === normalizeUrl(SITE.productionUrl)
 
 export const BUSINESS = {
   name: 'Mummy2Be',
