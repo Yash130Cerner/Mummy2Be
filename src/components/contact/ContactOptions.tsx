@@ -54,7 +54,11 @@ export function ContactOptions({
   ]
 
   return (
-    <ul className="grid gap-3 sm:grid-cols-2">
+    // grid-cols-1 is load-bearing, not decorative: it compiles to
+    // minmax(0,1fr). Without it the mobile grid has no column template, so
+    // each <li> falls back to min-width:auto and sizes to its min-content -
+    // which was wider than the phone and scrolled the whole page sideways.
+    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {channels.map((c) => (
         <li key={c.channel}>
           <ChannelLink
@@ -66,7 +70,14 @@ export function ContactOptions({
             {c.icon}
             <span className="min-w-0">
               <span className="block font-semibold">{c.label}</span>
-              <span className="block truncate text-[13.5px] text-cocoa-light">{c.detail}</span>
+              {/*
+                Wraps rather than truncating. `truncate` implies nowrap, which
+                made this line's min-content the full sentence and was the root
+                of the overflow - and an ellipsis would have hidden the
+                reassurance copy on the one screen that converts. break-words
+                keeps an unbreakable string (a long email) from overflowing.
+              */}
+              <span className="block break-words text-[13.5px] text-cocoa-light">{c.detail}</span>
             </span>
           </ChannelLink>
         </li>
